@@ -1,9 +1,11 @@
+package ru.atomskih;
+
 public class Start {
 
     public static void main(String[] args) {
 
-        Range range1 = new Range(1.0, 5.0);
-        Range range2 = new Range(3.0, 7.0);
+        Range range1 = new Range(1.0, 9.0);
+        Range range2 = new Range(6.0, 8.0);
 
         // 1. Проверяем функцию на принадлежность числа "x" диапазону.
         int x = 12;
@@ -15,14 +17,14 @@ public class Start {
         System.out.println("   Длина интервала: " + range2 + " = " + range2.length());
 
         // 3.Проверяем функцию объединения двух интервалов
-        Range[] mergedRange = range1.unionRange(range2);
+        Range[] mergedRange = range1.union(range2);
 
         for (int i = 0; i <= mergedRange.length - 1; i++) {
             System.out.println("3. Объединение интервалов: " + mergedRange[i]);
         }
 
         // 4. Проверяем функцию вычисления интервала-пересечения двух интервалов
-        Range resultRange = range1.crossingRange(range2);
+        Range resultRange = range1.crossing(range2);
         System.out.println(resultRange == null ? "4. Интервалы не пересекаются" : "4. Пересечение: " + resultRange);
 
         //5. Проверяем функцию разности range1 - range2
