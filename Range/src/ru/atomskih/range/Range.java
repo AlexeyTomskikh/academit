@@ -54,14 +54,16 @@ public class Range {
      */
     public Range crossing(Range range) {
 
-        if (!this.isCross(range)) {                                     // если интервалы не пересекаются, то дальше не идём
+        Range rangeCopy = new Range(this.from, this.to);
+
+        if (rangeCopy.isCross(range)) {                                     // если интервалы не пересекаются, то дальше не идём
             return null;
-        } else if (range.from >= this.from && range.from <= this.to && range.to >= this.to) {  // если range1 накладывается слева на range2
-            return new Range(range.from, this.to);
-        } else if (range.to >= this.from && range.to <= this.to && range.from <= this.from) {   // если range2 накладывается слева на range1
-            return new Range(this.from, range.to);
-        } else if (range.from <= this.from && range.to >= this.to) {  // если range2 охватывает range1
-            return new Range(this.from, this.to);
+        } else if (rangeCopy.from < range.from && rangeCopy.to < range.to) {  // если range1 накладывается слева на range2
+            return new Range(range.from, rangeCopy.to);
+        } else if (range.from < rangeCopy.from && range.to < rangeCopy.to) {   // если range2 накладывается слева на range1
+            return new Range(rangeCopy.from, range.to);
+        } else if (range.from < rangeCopy.from) {                        // если range2 охватывает range1
+            return new Range(rangeCopy.from, rangeCopy.to);
         } else {                                                    // range1 охватывает range2
             return new Range(range.from, range.to);
         }
@@ -76,12 +78,17 @@ public class Range {
     public Range[] union(Range range) {
 
         Range rangeCopy = new Range(this.from, this.to);
-        if (rangeCopy.to > range.to && rangeCopy.from < range.from) { // если первое множество охватывает второе
+
+        if (rangeCopy.isCross(range)) {
+            return new Range[]{new Range(rangeCopy.from, range.to)};
+        } else if (rangeCopy.to > range.to && rangeCopy.from < range.from) { // если первое множество охватывает второе
             return new Range[]{new Range(rangeCopy.from, rangeCopy.to)};
         } else if (range.from < rangeCopy.from && range.to > rangeCopy.to) { // если второе охватывает первое
             return new Range[]{new Range(range.from, range.to)};
+        } else if (rangeCopy.from > range.from) {
+            return new Range[]{new Range(range.from, rangeCopy.to)};
         } else {
-            return new Range[]{new Range(rangeCopy.from, range.to)};   // остальные случаи
+            return new Range[]{new Range(rangeCopy.from, range.to)};
         }
     }
 
@@ -93,19 +100,18 @@ public class Range {
      */
     public Range[] difference(Range range) {
 
-        if (!this.isCross(range)) {                                     // если интервалы не пересекаются
-            return new Range[]{this};
-        } else if (this.from < range.from && this.to > range.to) {      // если первое множество охватывает второе
-            Range a = new Range(this.from, range.from - 1);
-            Range b = new Range(range.to + 1, this.to);
-            return new Range[]{a, b};
-        } else if (range.from <= this.from && range.to >= this.to) {    // если второе охватывает первое
+        Range rangeCopy = new Range(this.from, this.to);
+
+        if (rangeCopy.isCross(range)) {                                     // если интервалы не пересекаются
+            return new Range[]{rangeCopy};
+        } else if (rangeCopy.from < range.from && rangeCopy.to > range.to) {      // если первое множество охватывает второе
+            return new Range[]{new Range(rangeCopy.from, range.from), new Range(range.to, rangeCopy.to)};
+        } else if (range.from <= rangeCopy.from && range.to >= rangeCopy.to) {    // если второе охватывает первое
             return null;
-        } else if (range.from >= this.from && range.from <= this.to && range.to >= this.to) {   // если интервалы наклыдваются друг на друга
-            Range a = new Range(this.from, range.from - 1);
-            return new Range[]{a};
+        } else if (rangeCopy.from > range.from) {                       // // если range2 накладывается слева на range1
+            return new Range[]{new Range(range.to, rangeCopy.to)};
         } else {
-            return null;
+            return new Range[]{new Range(rangeCopy.from, range.from)}; // если range1 накладывается слева на range2
         }
     }
 
@@ -116,8 +122,8 @@ public class Range {
      * @return boolean
      */
     public boolean isCross(Range range) {
-
-        return range.from > this.from && range.from < this.to || range.to > this.from && range.to < this.to;
+        Range rangeCopy = new Range(this.from, this.to);
+        return rangeCopy.to < range.from || range.to < rangeCopy.from;
     }
 
     @Override
