@@ -1,4 +1,4 @@
-package ru.atomskih;
+package ru.atomskih.range;
 
 public class Start {
 
