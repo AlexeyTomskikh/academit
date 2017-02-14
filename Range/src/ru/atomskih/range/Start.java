@@ -18,11 +18,11 @@ public class Start {
 
         // 3.Проверяем функцию объединения двух интервалов
         Range[] mergedRange = range1.union(range2);
-
+        System.out.print("3. Объединение интервалов: ");
         for (int i = 0; i <= mergedRange.length - 1; i++) {
-            System.out.println("3. Объединение интервалов: " + mergedRange[i]);
+            System.out.print(mergedRange[i]);
         }
-
+        System.out.println();
         // 4. Проверяем функцию вычисления интервала-пересечения двух интервалов
         Range resultRange = range1.crossing(range2);
         System.out.println(resultRange == null ? "4. Интервалы не пересекаются" : "4. Пересечение: " + resultRange);

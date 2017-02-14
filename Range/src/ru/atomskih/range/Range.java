@@ -54,18 +54,10 @@ public class Range {
      */
     public Range crossing(Range range) {
 
-        Range rangeCopy = new Range(this.from, this.to);
-
-        if (rangeCopy.isCross(range)) {                                     // если интервалы не пересекаются, то дальше не идём
+        if (this.intervalsIntersection(range)) {                            // если интервалы не пересекаются, то дальше не идём
+            return new Range(Math.max(this.from, range.from), Math.min(this.to, range.to));
+        } else {
             return null;
-        } else if (rangeCopy.from < range.from && rangeCopy.to < range.to) {  // если range1 накладывается слева на range2
-            return new Range(range.from, rangeCopy.to);
-        } else if (range.from < rangeCopy.from && range.to < rangeCopy.to) {   // если range2 накладывается слева на range1
-            return new Range(rangeCopy.from, range.to);
-        } else if (range.from < rangeCopy.from) {                        // если range2 охватывает range1
-            return new Range(rangeCopy.from, rangeCopy.to);
-        } else {                                                    // range1 охватывает range2
-            return new Range(range.from, range.to);
         }
     }
 
@@ -79,16 +71,10 @@ public class Range {
 
         Range rangeCopy = new Range(this.from, this.to);
 
-        if (rangeCopy.isCross(range)) {
-            return new Range[]{new Range(rangeCopy.from, range.to)};
-        } else if (rangeCopy.to > range.to && rangeCopy.from < range.from) { // если первое множество охватывает второе
-            return new Range[]{new Range(rangeCopy.from, rangeCopy.to)};
-        } else if (range.from < rangeCopy.from && range.to > rangeCopy.to) { // если второе охватывает первое
-            return new Range[]{new Range(range.from, range.to)};
-        } else if (rangeCopy.from > range.from) {
-            return new Range[]{new Range(range.from, rangeCopy.to)};
+        if (rangeCopy.intervalsIntersection(range)) {
+            return new Range[]{new Range(Math.min(rangeCopy.from, range.from), Math.max(rangeCopy.to, range.to))};
         } else {
-            return new Range[]{new Range(rangeCopy.from, range.to)};
+            return new Range[]{rangeCopy, range};
         }
     }
 
@@ -102,7 +88,7 @@ public class Range {
 
         Range rangeCopy = new Range(this.from, this.to);
 
-        if (rangeCopy.isCross(range)) {                                     // если интервалы не пересекаются
+        if (!rangeCopy.intervalsIntersection(range)) {                                     // если интервалы не пересекаются
             return new Range[]{rangeCopy};
         } else if (rangeCopy.from < range.from && rangeCopy.to > range.to) {      // если первое множество охватывает второе
             return new Range[]{new Range(rangeCopy.from, range.from), new Range(range.to, rangeCopy.to)};
@@ -121,9 +107,9 @@ public class Range {
      * @param range интервал, факт пересечения с которым необходимо выяснить
      * @return boolean
      */
-    public boolean isCross(Range range) {
-        Range rangeCopy = new Range(this.from, this.to);
-        return rangeCopy.to < range.from || range.to < rangeCopy.from;
+    public boolean intervalsIntersection(Range range) {
+        boolean result = !(this.to < range.from || range.to < this.from);
+        return result;
     }
 
     @Override
