@@ -4,10 +4,10 @@ public enum TypeData {
 
     NUMBERS, LINES, UNRECOGNIZED_CHOICE;
 
-    public static TypeData safeValueOf(final String s) {
+    public static TypeData safeValueOf(String s) {
         try {
             return TypeData.valueOf(s);
-        } catch (final IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED_CHOICE;
         }
     }

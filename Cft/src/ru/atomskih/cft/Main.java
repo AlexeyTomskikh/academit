@@ -20,19 +20,16 @@ public class Main {
         String fileInput = args[2];  //  имя входного файла
         String fileOutput = args[3];  //  имя выходного файла
 
-        // ЧИТАЕМ СТРОКИ
-        ArrayList resultArray = new ArrayList();
-
         switch (TypeData.safeValueOf(dataType)) {
             case LINES:
-                resultArray = ReadLines.read(fileInput); //читаем
+                ArrayList<String> resultArray = ReadLines.read(fileInput); //читаем
                 resultArray = SortLines.sorting(resultArray, sortMode); //сортируем
                 Write.write(resultArray, fileOutput); // записываем
                 break;
             case NUMBERS:
-                resultArray = ReadNumbers.read(fileInput); // читаем
-                resultArray = SortNumbers.sorting(resultArray, sortMode); //сортируем
-                Write.write(resultArray, fileOutput); // записываем
+                ArrayList<Integer>resultArrayInt = ReadNumbers.read(fileInput); // читаем
+                resultArrayInt = SortNumbers.sorting(resultArrayInt, sortMode); //сортируем
+                Write.write(resultArrayInt, fileOutput); // записываем
                 break;
             case UNRECOGNIZED_CHOICE:
                 System.out.println("НЕСУЩЕСТВУЮЩИЙ ТИП ФАЙЛА");

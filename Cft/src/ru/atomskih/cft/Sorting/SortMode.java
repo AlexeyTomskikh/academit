@@ -4,10 +4,10 @@ enum SortMode {
 
     UP, DOWN, UNRECOGNIZED_CHOICE;
 
-    public static SortMode safeValueOf(final String s) {
+    public static SortMode safeValueOf(String s) {
         try {
             return SortMode.valueOf(s);
-        } catch (final IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED_CHOICE;
         }
     }

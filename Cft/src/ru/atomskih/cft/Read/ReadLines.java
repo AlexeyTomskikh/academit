@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class ReadLines {
 
-    public static ArrayList read(String fileInput) throws FileNotFoundException {
-        ArrayList<String> lines = new ArrayList<>();
+    public static ArrayList<String> read(String fileInput) throws FileNotFoundException {
+        ArrayList<String> lines = new ArrayList<>(100);
         try (Scanner scan = new Scanner(new FileInputStream(fileInput))) {
             while (scan.hasNextLine()) {
                 lines.add(scan.nextLine());
