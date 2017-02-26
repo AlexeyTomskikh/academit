@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Write {
 
-    public static void write(ArrayList array, String fileOutput) throws FileNotFoundException {
+    public static void write(ArrayList<?> array, String fileOutput) throws FileNotFoundException {
 
         try (PrintWriter writer = new PrintWriter(fileOutput)) {
 

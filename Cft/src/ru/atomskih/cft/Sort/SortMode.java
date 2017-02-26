@@ -1,6 +1,6 @@
-package ru.atomskih.cft.Sorting;
+package ru.atomskih.cft.Sort;
 
-enum SortMode {
+public enum SortMode {
 
     UP, DOWN, UNRECOGNIZED_CHOICE;
 
