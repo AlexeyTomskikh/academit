@@ -4,8 +4,8 @@ public class Start {
 
     public static void main(String[] args) {
 
-        Range range1 = new Range(1.0, 3.0);
-        Range range2 = new Range(2.0, 5.0);
+        Range range1 = new Range(3.0, 6.0);
+        Range range2 = new Range(4.0, 8.0);
 
         // 1. Проверяем функцию на принадлежность числа "x" диапазону.
         int x = 12;

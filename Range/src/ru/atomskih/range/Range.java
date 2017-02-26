@@ -15,7 +15,12 @@ public class Range {
     }
 
     public void setFrom(double from) {
-        this.from = from;
+
+        if (from > this.to) {
+            throw new IllegalArgumentException("Ошибка! Начало не может быть больше конца");
+        } else {
+            this.from = from;
+        }
     }
 
     public double getTo() {
@@ -54,7 +59,7 @@ public class Range {
      */
     public Range crossing(Range range) {
 
-        if (this.intervalsIntersection(range)) {                            // если интервалы не пересекаются, то дальше не идём
+        if (this.hasIntersection(range)) {                            // если интервалы не пересекаются, то дальше не идём
             return new Range(Math.max(this.from, range.from), Math.min(this.to, range.to));
         } else {
             return null;
@@ -69,12 +74,13 @@ public class Range {
      */
     public Range[] union(Range range) {
 
-        Range rangeCopy = new Range(this.from, this.to);
 
-        if (rangeCopy.intervalsIntersection(range)) {
-            return new Range[]{new Range(Math.min(rangeCopy.from, range.from), Math.max(rangeCopy.to, range.to))};
+        if (this.hasIntersection(range)) {
+            return new Range[]{new Range(Math.min(this.from, range.from), Math.max(this.to, range.to))};
         } else {
-            return new Range[]{rangeCopy, range};
+            Range rangeCopyOne = new Range(this.from, this.to);
+            Range rangeCopyTwo = range;
+            return new Range[]{rangeCopyOne, rangeCopyTwo};
         }
     }
 
@@ -86,18 +92,17 @@ public class Range {
      */
     public Range[] difference(Range range) {
 
-        Range rangeCopy = new Range(this.from, this.to);
-
-        if (!rangeCopy.intervalsIntersection(range)) {                                     // если интервалы не пересекаются
+        if (!this.hasIntersection(range)) {
+            Range rangeCopy = new Range(this.from, this.to);// если интервалы не пересекаются
             return new Range[]{rangeCopy};
-        } else if (rangeCopy.from < range.from && rangeCopy.to > range.to) {      // если первое множество охватывает второе
-            return new Range[]{new Range(rangeCopy.from, range.from), new Range(range.to, rangeCopy.to)};
-        } else if (range.from <= rangeCopy.from && range.to >= rangeCopy.to) {    // если второе охватывает первое
+        } else if (this.from <= range.from && this.to >= range.to) {      // если первое множество охватывает второе
+            return new Range[]{new Range(this.from, range.from), new Range(range.to, this.to)};
+        } else if (range.from <= this.from && range.to >= this.to) {    // если второе охватывает первое
             return null;
-        } else if (rangeCopy.from > range.from) {                       // // если range2 накладывается слева на range1
-            return new Range[]{new Range(range.to, rangeCopy.to)};
+        } else if (this.from >= range.from) {                       // // если range2 накладывается слева на range1
+            return new Range[]{new Range(range.to, this.to)};
         } else {
-            return new Range[]{new Range(rangeCopy.from, range.from)}; // если range1 накладывается слева на range2
+            return new Range[]{new Range(this.from, range.from)}; // если range1 накладывается слева на range2
         }
     }
 
@@ -107,9 +112,9 @@ public class Range {
      * @param range интервал, факт пересечения с которым необходимо выяснить
      * @return boolean
      */
-    public boolean intervalsIntersection(Range range) {
-        boolean result = !(this.to < range.from || range.to < this.from);
-        return result;
+    public boolean hasIntersection(Range range) {
+
+        return this.from < range.to && this.to > range.from;
     }
 
     @Override
