@@ -4,8 +4,8 @@ public class Start {
 
     public static void main(String[] args) {
 
-        Range range1 = new Range(3.0, 6.0);
-        Range range2 = new Range(4.0, 8.0);
+        Range range1 = new Range(1, 5);
+        Range range2 = new Range(0, 8);
 
         // 1. Проверяем функцию на принадлежность числа "x" диапазону.
         int x = 12;
@@ -29,7 +29,7 @@ public class Start {
 
         //5. Проверяем функцию разности range1 - range2
         Range[] resultDifference = range1.difference(range2);
-        if (resultDifference == null) {
+        if (resultDifference.length == 0) {
             System.out.println("5. Разности A - B не существует ");
         } else {
             System.out.print("5. Разность A - B: ");
@@ -37,6 +37,7 @@ public class Start {
                 System.out.print(resultDifference[i]);
             }
         }
+
     }
 }
 

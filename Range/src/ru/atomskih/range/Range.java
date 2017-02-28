@@ -6,8 +6,13 @@ public class Range {
     private double to;
 
     public Range(double from, double to) {
-        this.from = from;
-        this.to = to;
+
+        if (from > to) {
+            throw new IllegalArgumentException("Ошибка! Начало не может быть больше конца");
+        } else {
+            this.from = from;
+            this.to = to;
+        }
     }
 
     public double getFrom() {
@@ -28,7 +33,12 @@ public class Range {
     }
 
     public void setTo(double to) {
-        this.to = to;
+
+        if (to < this.from) {
+            throw new IllegalArgumentException("Ошибка! Начало не может быть больше конца");
+        } else {
+            this.to = to;
+        }
     }
 
     /**
@@ -74,12 +84,11 @@ public class Range {
      */
     public Range[] union(Range range) {
 
-
         if (this.hasIntersection(range)) {
             return new Range[]{new Range(Math.min(this.from, range.from), Math.max(this.to, range.to))};
         } else {
             Range rangeCopyOne = new Range(this.from, this.to);
-            Range rangeCopyTwo = range;
+            Range rangeCopyTwo = new Range(range.from, range.to);
             return new Range[]{rangeCopyOne, rangeCopyTwo};
         }
     }
@@ -95,11 +104,11 @@ public class Range {
         if (!this.hasIntersection(range)) {
             Range rangeCopy = new Range(this.from, this.to);// если интервалы не пересекаются
             return new Range[]{rangeCopy};
-        } else if (this.from <= range.from && this.to >= range.to) {      // если первое множество охватывает второе
+        } else if (this.from < range.from && this.to > range.to) {      // если первое множество охватывает второе
             return new Range[]{new Range(this.from, range.from), new Range(range.to, this.to)};
-        } else if (range.from <= this.from && range.to >= this.to) {    // если второе охватывает первое
-            return null;
-        } else if (this.from >= range.from) {                       // // если range2 накладывается слева на range1
+        } else if (range.from < this.from && range.to > this.to) {    // если второе охватывает первое
+            return new Range[]{};
+        } else if (this.from >= range.from) {                       // если range2 накладывается слева на range1
             return new Range[]{new Range(range.to, this.to)};
         } else {
             return new Range[]{new Range(this.from, range.from)}; // если range1 накладывается слева на range2
