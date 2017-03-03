@@ -106,7 +106,7 @@ public class Range {
             return new Range[]{rangeCopy};
         } else if (this.from < range.from && this.to > range.to) {      // если первое множество охватывает второе
             return new Range[]{new Range(this.from, range.from), new Range(range.to, this.to)};
-        } else if (range.from < this.from && range.to > this.to) {    // если второе охватывает первое
+        } else if (range.from <= this.from && range.to >= this.to) {    // если второе охватывает первое
             return new Range[]{};
         } else if (this.from >= range.from) {                       // если range2 накладывается слева на range1
             return new Range[]{new Range(range.to, this.to)};
