@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ReadNumbers {
 
-    public static ArrayList<Integer> read(String fileInput) {
+    public static ArrayList<Integer> read(String fileInput) throws FileNotFoundException {
 
         ArrayList<Integer> numberArray = new ArrayList<>(100);
         try (Scanner scan = new Scanner(new FileInputStream(fileInput))) {
@@ -15,7 +15,7 @@ public class ReadNumbers {
                 numberArray.add(scan.nextInt());
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден.");
+            throw new FileNotFoundException();
         }
         return numberArray;
     }

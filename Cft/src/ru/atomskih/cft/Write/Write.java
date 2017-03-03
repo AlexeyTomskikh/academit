@@ -1,13 +1,12 @@
 package ru.atomskih.cft.Write;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Write {
 
-    public static void write(ArrayList<?> array, String fileOutput) {
+    public static void write(ArrayList<?> array, String fileOutput) throws IOException {
 
         try (PrintWriter writer = new PrintWriter(fileOutput)) {
 
@@ -15,7 +14,7 @@ public class Write {
                 writer.println(e);
             }
         } catch (IOException e) {
-            System.out.println("Ошибка записи в файл.");
+            throw new IOException();
         }
     }
 }
