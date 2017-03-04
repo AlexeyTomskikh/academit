@@ -13,8 +13,6 @@ public class ReadLines {
             while (scan.hasNextLine()) {
                 lines.add(scan.nextLine());
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException();
         }
         return lines;
     }

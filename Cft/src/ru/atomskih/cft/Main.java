@@ -50,7 +50,7 @@ public class Main {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Исходный файл не найден!!.");
+            System.out.println("Исходный файл не найден.");
         } catch (IOException e) {
             System.out.println("Ошибка записи в файл.");
         } catch (IllegalArgumentException e) {

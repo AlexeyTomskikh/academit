@@ -14,8 +14,6 @@ public class ReadNumbers {
             while (scan.hasNextInt()) {
                 numberArray.add(scan.nextInt());
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException();
         }
         return numberArray;
     }
