@@ -13,8 +13,6 @@ public class Write {
             for (Object e : array) {
                 writer.println(e);
             }
-        } catch (IOException e) {
-            throw new IOException();
         }
     }
 }
