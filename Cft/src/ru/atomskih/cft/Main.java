@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
         try {
             String fileInput = args[0];  //  имя входного файла
             String fileOutput = args[1];  //  имя выходного файла
             String sortMode = args[2];  //  режим сортировки, up || down
             String dataType = args[3];  //  тип содержимого, i || s
-
 
             if (args.length != 4) {
                 throw new ArrayIndexOutOfBoundsException();
@@ -25,24 +25,12 @@ public class Main {
                 switch (dataType) {
                     case "-s":
                         ArrayList<String> resultArray = ReadLines.read(fileInput); //читаем
-                        if (sortMode.equals("-a")) {
-                            resultArray = Sorting.sorting(resultArray, new StringComparator()); //сортируем -a
-                        } else if (sortMode.equals("-d")) {
-                            resultArray = Sorting.sorting(resultArray, new StringComparator().reversed()); //сортируем -d
-                        } else {
-                            throw new IllegalArgumentException();
-                        }
+                        resultArray = Sorting.sorting(resultArray, Mode.select(sortMode, new StringComparator())); //сортируем
                         Write.write(resultArray, fileOutput); // записываем
                         break;
                     case "-i":
                         ArrayList<Integer> resultArrayInt = ReadNumbers.read(fileInput); // читаем
-                        if (sortMode.equals("-a")) {
-                            resultArrayInt = Sorting.sorting(resultArrayInt, new IntegerComparator()); //сортируем -a
-                        } else if (sortMode.equals("-d")) {
-                            resultArrayInt = Sorting.sorting(resultArrayInt, new IntegerComparator().reversed()); //сортируем -d
-                        } else {
-                            throw new IllegalArgumentException();
-                        }
+                        resultArrayInt = Sorting.sorting(resultArrayInt, Mode.select(sortMode, new IntegerComparator())); //сортируем
                         Write.write(resultArrayInt, fileOutput); // записываем
                         break;
                     default:
@@ -54,15 +42,11 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Ошибка записи в файл.");
         } catch (IllegalArgumentException e) {
-            System.out.println("Неверно указан режим сортировки. Смотрите инструкцию");
+            System.out.println("Неверно указан режим сортировки.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Неверное количество аргументов");
+            System.out.println("Неверное количество аргументов.");
         } catch (UserException e) {
-            System.out.println("Неверно указан тип данных");
+            System.out.println("Неверно указан тип данных.");
         }
     }
 }
-
-
-
-
