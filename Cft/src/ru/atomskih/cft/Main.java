@@ -34,7 +34,7 @@ public class Main {
                         Write.write(resultArrayInt, fileOutput); // записываем
                         break;
                     default:
-                        throw new UserException();
+                        throw new DataTypeErrorException();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -45,7 +45,7 @@ public class Main {
             System.out.println("Неверно указан режим сортировки.");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Неверное количество аргументов.");
-        } catch (UserException e) {
+        } catch (DataTypeErrorException e) {
             System.out.println("Неверно указан тип данных.");
         }
     }
