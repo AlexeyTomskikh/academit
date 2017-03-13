@@ -24,14 +24,14 @@ public class Main {
             } else {
                 switch (dataType) {
                     case "-s":
-                        ArrayList<String> resultArray = ReadLines.read(fileInput); //читаем
-                        resultArray = Sorting.sorting(resultArray, Mode.select(sortMode, new StringComparator())); //сортируем
-                        Write.write(resultArray, fileOutput); // записываем
+                        ArrayList<String> resultArray = ReadLines.read(fileInput);
+                        resultArray = Sorting.sorting(resultArray, Mode.select(sortMode, new StringComparator()));
+                        Write.write(resultArray, fileOutput);
                         break;
                     case "-i":
-                        ArrayList<Integer> resultArrayInt = ReadNumbers.read(fileInput); // читаем
-                        resultArrayInt = Sorting.sorting(resultArrayInt, Mode.select(sortMode, new IntegerComparator())); //сортируем
-                        Write.write(resultArrayInt, fileOutput); // записываем
+                        ArrayList<Integer> resultArrayInt = ReadNumbers.read(fileInput);
+                        resultArrayInt = Sorting.sorting(resultArrayInt, Mode.select(sortMode, new IntegerComparator()));
+                        Write.write(resultArrayInt, fileOutput);
                         break;
                     default:
                         throw new DataTypeErrorException();
