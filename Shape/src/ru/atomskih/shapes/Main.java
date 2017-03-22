@@ -16,7 +16,7 @@ public class Main {
 
         ArrayList<Shape> list = new ArrayList<>(Arrays.asList(circle, rectangle, square, triangle));
 
-        System.out.printf("Фигура с максимальной площадью это " + MaxArea.search(list) + ". Её площадь: %.2f см. %n", MaxArea.search(list).getArea());
+        System.out.printf("Фигура с максимальной площадью это " + Area.search(list) + ". Её площадь: %.2f см. %n", Area.search(list).getArea());
         System.out.printf("Фигура с вторым по величине периметром это " + Perimeter.search(list) + ". Её периметр: %.2f см. %n", Perimeter.search(list).getPerimeter());
 
         System.out.println();

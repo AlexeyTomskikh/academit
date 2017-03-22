@@ -1,7 +1,8 @@
 package ru.atomskih.shapes.Shape;
 
-public class Rectangle extends Shape {
+public class Rectangle implements Shape {
 
+    String name = "Прямоугольник";
     private double width;
     private double height;
 
@@ -29,13 +30,17 @@ public class Rectangle extends Shape {
     @Override
     public String toString() {
 
-        return "Прямоугольник";
+        return name;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
-        if (o == null || o.getClass() != this.getClass()) return false;
+        if (o == this) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
         Rectangle r = (Rectangle) o;
         return width == r.width && height == r.height;
     }

@@ -1,13 +1,16 @@
 package ru.atomskih.shapes.Shape;
 
-public class Circle extends Shape {
+public class Circle implements Shape, Comparable<Shape> {
 
+    String name = "Круг";
     private double radius;
-    private final double PI = 3.14;
+
 
     public Circle(double radius) {
         this.radius = radius;
+
     }
+
 
     public double getWidth() {
         return radius * 2;
@@ -18,22 +21,26 @@ public class Circle extends Shape {
     }
 
     public double getArea() {
-        return PI * Math.pow(radius, 2);
+        return Math.PI * Math.pow(radius, 2);
     }
 
     public double getPerimeter() {
-        return 2 * PI * radius;
+        return 2 * Math.PI * radius;
     }
 
     @Override
     public String toString() {
-        return "Круг";
+        return name;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
-        if (o == null || o.getClass() != this.getClass()) return false;
+        if (o == this) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
         Circle c = (Circle) o;
         return radius == c.radius;
 
@@ -46,5 +53,16 @@ public class Circle extends Shape {
         int hash = 1;
         hash = prime * hash + (int) radius;
         return hash;
+    }
+
+
+
+    @Override
+    public int compareTo(Shape o) {
+        if(this.getArea()> o.getArea()){
+            return -1;
+        }else {
+            return 1;
+        }
     }
 }
