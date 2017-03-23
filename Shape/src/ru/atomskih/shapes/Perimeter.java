@@ -1,7 +1,7 @@
 package ru.atomskih.shapes;
 
-import ru.atomskih.shapes.Comparators.PerimeterComparator;
-import ru.atomskih.shapes.Shape.Shape;
+import ru.atomskih.shapes.comparators.PerimeterComparator;
+import ru.atomskih.shapes.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Collections;

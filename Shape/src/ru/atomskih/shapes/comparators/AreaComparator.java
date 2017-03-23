@@ -1,6 +1,6 @@
-package ru.atomskih.shapes.Comparators;
+package ru.atomskih.shapes.comparators;
 
-import ru.atomskih.shapes.Shape.Shape;
+import ru.atomskih.shapes.shape.Shape;
 
 import java.util.Comparator;
 

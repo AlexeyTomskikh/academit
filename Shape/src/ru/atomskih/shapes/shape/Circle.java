@@ -1,34 +1,34 @@
-package ru.atomskih.shapes.Shape;
+package ru.atomskih.shapes.shape;
 
-public class Square implements Shape {
+public class Circle implements Shape {
 
-    String name = "Квадрат";
-    private double sideLength;
+    private static final String name = "Круг";
+    private double radius;
 
-    public Square(double sideLength) {
-        this.sideLength = sideLength;
+    public Circle(double radius) {
+        this.radius = radius;
+
     }
 
     public double getWidth() {
-        return sideLength;
+        return radius * 2;
     }
 
     public double getHeight() {
-        return sideLength;
+        return radius * 2;
     }
 
     public double getArea() {
-        return Math.pow(sideLength, 2);
+        return Math.PI * Math.pow(radius, 2);
     }
 
     public double getPerimeter() {
-        return sideLength + sideLength + sideLength + sideLength;
+        return 2 * Math.PI * radius;
     }
 
     @Override
     public String toString() {
-
-        return name;
+        return name + ". Радиус = " + radius;
     }
 
     @Override
@@ -39,16 +39,17 @@ public class Square implements Shape {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        Square s = (Square) o;
-        return sideLength == s.sideLength;
+        Circle c = (Circle) o;
+        return radius == c.radius;
+
     }
 
+    @Override
     public int hashCode() {
 
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + (int) sideLength;
+        hash = prime * hash + (int) radius;
         return hash;
     }
-
 }

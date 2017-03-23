@@ -1,4 +1,4 @@
-package ru.atomskih.shapes.Shape;
+package ru.atomskih.shapes.shape;
 
 public interface Shape {
 

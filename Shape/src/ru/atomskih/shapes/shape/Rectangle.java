@@ -1,8 +1,8 @@
-package ru.atomskih.shapes.Shape;
+package ru.atomskih.shapes.shape;
 
 public class Rectangle implements Shape {
 
-    String name = "Прямоугольник";
+    private static final String name = "Прямоугольник";
     private double width;
     private double height;
 
@@ -30,7 +30,7 @@ public class Rectangle implements Shape {
     @Override
     public String toString() {
 
-        return name;
+        return name + ". Ширина = " + width + ", Высота = " + height;
     }
 
     @Override

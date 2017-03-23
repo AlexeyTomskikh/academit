@@ -1,8 +1,8 @@
-package ru.atomskih.shapes.Shape;
+package ru.atomskih.shapes.shape;
 
 public class Triangle implements Shape {
 
-    private String name = "Треугольник";
+    private static final String name = "Треугольник";
     private double x1;
     private double y1;
     private double x2;
@@ -37,26 +37,17 @@ public class Triangle implements Shape {
 
     public double getArea() {
 
-        double halfPerimeter = (abLength() + acLength() + cbLength()) / 2;
-        return Math.sqrt((halfPerimeter * (halfPerimeter - abLength()) * (halfPerimeter - acLength()) * (halfPerimeter - cbLength())));
+        double halfPerimeter = getPerimeter() / 2;
+        return Math.sqrt((halfPerimeter * (halfPerimeter - sideLength(x2, x1, y2, y1)) * (halfPerimeter - sideLength(x3, x1, y3, y1)) * (halfPerimeter - sideLength(x3, x2, y3, y2))));
     }
 
     public double getPerimeter() {
 
-        return abLength() + acLength() + cbLength();
+        return sideLength(x2, x1, y2, y1) + sideLength(x3, x1, y3, y1) + sideLength(x3, x2, y3, y2);
     }
 
-    private double abLength() {
-        return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
-    }
-
-    private double acLength() {
-
-        return Math.sqrt(Math.pow((x3 - x1), 2) + Math.pow((y3 - y1), 2));
-    }
-
-    private double cbLength() {
-        return Math.sqrt(Math.pow((x3 - x2), 2) + Math.pow((y3 - y2), 2));
+    private double sideLength(double b, double a, double d, double c) {
+        return Math.sqrt(Math.pow((b - a), 2) + Math.pow((d - c), 2));
     }
 
     private double max(double a, double b, double c) {
@@ -88,7 +79,7 @@ public class Triangle implements Shape {
     @Override
     public String toString() {
 
-        return name;
+        return name + ". Координаты: x1 = " + x1 + " y1 =  " + y1 + " x2 =  " + x2 + " y2 = " + y2 + " x3 = " + x3 + " y3 = " + y3;
     }
 
     @Override
