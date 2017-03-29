@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Cft/Cft.iml" filepath="$PROJECT_DIR$/Cft/Cft.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Csv/Csv.iml" filepath="$PROJECT_DIR$/Csv/Csv.iml" />
       <module fileurl="file://$PROJECT_DIR$/Range/Range.iml" filepath="$PROJECT_DIR$/Range/Range.iml" />
       <module fileurl="file://$PROJECT_DIR$/Shape/Shape.iml" filepath="$PROJECT_DIR$/Shape/Shape.iml" />
       <module fileurl="file://$PROJECT_DIR$/Test/Test.iml" filepath="$PROJECT_DIR$/Test/Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Vector/Vector.iml" filepath="$PROJECT_DIR$/Vector/Vector.iml" />
     </modules>
   </component>
 </project>

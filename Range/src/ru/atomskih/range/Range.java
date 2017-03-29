@@ -102,7 +102,7 @@ public class Range {
     public Range[] difference(Range range) {
 
         if (!this.hasIntersection(range)) {
-            Range rangeCopy = new Range(this.from, this.to);// если интервалы не пересекаются
+            Range rangeCopy = new Range(this.from, this.to);// если интервалы не пересекаются (!?)
             return new Range[]{rangeCopy};
         } else if (this.from < range.from && this.to > range.to) {      // если первое множество охватывает второе
             return new Range[]{new Range(this.from, range.from), new Range(range.to, this.to)};
