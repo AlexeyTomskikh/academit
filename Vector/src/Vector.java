@@ -4,6 +4,7 @@ public class Vector {
 
     private double[] elements;
 
+
     // 1. Конструкторы
     // + a - Размерность n, все компоненты равны 0
     public Vector(int n) {
@@ -40,61 +41,80 @@ public class Vector {
     // + 3. Реализовать метод toString(), чтобы печатал вектор в формате { значения компонент через запятую } Например, { 1, 2, 3 }
     @Override
     public String toString() {
-        return Arrays.toString(elements);
+
+        if (this.elements == null)
+            return "null";
+        int iMax = this.elements.length - 1;
+        if (iMax == -1)
+            return "{}";
+
+        StringBuilder b = new StringBuilder();
+        b.append('{');
+        for (int i = 0; ; i++) {
+            b.append(this.elements[i]);
+            if (i == iMax)
+                return b.append('}').toString();
+            b.append(", ");
+        }
     }
 
     // 4. Реализовать нестатические методы:
 
     // + a. Прибавление к вектору другого вектора
 
-    public Vector amount(Vector array) {
-
-        Vector result = new Vector(array.getSize());
-
-        for (int i = 0; i <= array.elements.length - 1; i++) {
-            result.elements[i] = this.elements[i] + array.elements[i];
+    private void setLength(Vector array) {
+        if (array.getSize() > this.getSize()) {
+            this.elements = (new Vector(array.getSize(), this.elements)).elements;
+        } else if (this.getSize() > array.getSize()) {
+            array.elements = (new Vector(this.getSize(), array.elements)).elements;
         }
-        return result;
+
+
+    }
+
+    public Vector addition(Vector array) {
+
+        setLength(array);
+        for (int i = 0; i <= array.elements.length - 1; i++) {
+            this.elements[i] = this.elements[i] + array.elements[i];
+        }
+
+        return this;
     }
 
     // + b. Вычитание из вектора другого вектора
     public Vector difference(Vector array) {
-
-        Vector result = new Vector(array.getSize());
+        setLength(array);
         for (int i = 0; i <= array.elements.length - 1; i++) {
-            result.elements[i] = this.elements[i] - array.elements[i];
+            this.elements[i] = this.elements[i] - array.elements[i];
         }
-        return result;
+        return this;
     }
 
     // + c. Умножение вектора на скаляр
     public Vector multiplicationByScalar(int m) {
 
-        Vector result = new Vector(this.getSize());
         for (int i = 0; i <= this.elements.length - 1; i++) {
-            result.elements[i] = this.elements[i] * m;
+            this.elements[i] = this.elements[i] * m;
         }
-        return result;
+        return this;
     }
 
     // + d. Разворот вектора (умножение всех компонент на -1)
     public Vector turn() {
 
-        Vector result = new Vector(this.getSize());
-        for (int i = 0; i <= this.elements.length - 1; i++) {
-            result.elements[i] = this.elements[i] * (-1);
-        }
-        return result;
+        this.multiplicationByScalar(-1);
+        return this;
     }
     // + e. Получение длины вектора. См. getSize
 
     // + f. Получение и установка компоненты вектора по индексу
-    public double getElements(int index) {
+    public double getElement(int index) {
 
         return this.elements[index];
     }
 
-    public void setElements(double a, int index) {
+    public void setElement(int index, double a) {
         this.elements[index] = a;
     }
 
@@ -120,16 +140,36 @@ public class Vector {
     }
 
 
-   //5. Реализовать статические методы – должны создаваться новые векторы:
+    //5. Реализовать статические методы – должны создаваться новые векторы:
 
-    //  TO DO
-    // Скалярное произведение векторов
-    /*public static double multiplicationVectors(Vector one, Vector two) {
+    // + a. Сложение двух векторов
+    public static Vector addition(Vector one, Vector two) {
+
+        Vector result = new Vector(one.getSize());
+
+        for (int i = 0; i <= one.elements.length - 1; i++) {
+            result.elements[i] = one.elements[i] + two.elements[i];
+        }
+        return result;
+    }
+
+    // + b. Вычитание из вектора другого вектора
+    public static Vector difference(Vector one, Vector two) {
+
+        Vector result = new Vector(one.getSize());
+        for (int i = 0; i <= one.elements.length - 1; i++) {
+            result.elements[i] = one.elements[i] - two.elements[i];
+        }
+        return result;
+    }
+
+    // c. Скалярное произведение векторов
+    public static double multiplicationVectors(Vector one, Vector two) {
         double result = 0;
-        for (int i = 0; i <= one.elements.length; ) {
+        for (int i = 0; i <= one.elements.length - 1; ) {
             result += one.elements[i] * two.elements[i];
             i++;
         }
         return result;
-    }*/
+    }
 }
