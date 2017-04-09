@@ -3,15 +3,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Vector vector1 = new Vector(new double[]{5, 8, 6});
-        Vector vector2 = new Vector(new double[]{5, 7, 8});
+        Vector vector1 = new Vector(new double[]{2, 3});
+        Vector vector2 = new Vector(new double[]{1, 2, 3});
         Vector vector3 = new Vector(new double[]{5, 5});
         Vector vector4 = new Vector(new double[]{5, 5});
 
-        Vector vector5 = new Vector(vector3);
 
         // a. Сумма векторов
         System.out.println("Сумма векторов " + vector1.addition(vector2));
+        System.out.println("Переданный вектор2 " + vector2);
         // b. Разность векторов
         Vector vector6 = new Vector(new double[]{10, 8});
         Vector vector7 = new Vector(new double[]{5, 7, 8});
@@ -38,13 +38,8 @@ public class Main {
         // b. Вычитание векторов
         System.out.println("Статичный метод: Вычитание векторов " + Vector.difference(vector1, vector2));
         // c. Скалярное произведение векторов
-        System.out.println("Статичные метод: Скалярное произведение векторов = " + Vector.multiplicationVectors(vector1, vector2));
-
-
-
+        Vector vector8 = new Vector(new double[]{2, 3, 3});
+        Vector vector9 = new Vector(new double[]{1, 2});
+        System.out.println("Статичные метод: Скалярное произведение векторов = " + Vector.multiplicationVectors(vector8, vector9));
     }
-
-
-
-
 }

@@ -22,15 +22,19 @@ public class Vector {
     }
 
     // + c - звполнение вектора значениями из массива +
-    public Vector(double[] anArray) {
-        this.elements = Arrays.copyOf(anArray, anArray.length);
+    public Vector(double[] elements) {
+        this.elements = Arrays.copyOf(elements, elements.length);
     }
 
     // + d - Заполнение вектора значениями из массива. Если длина масива меньше n, то считать что в остальных компонентах 0
-    public Vector(int n, double[] anArray) {
-        this.elements = Arrays.copyOf(anArray, n);
-    }
+    public Vector(int n, double[] array) {
 
+        if (n > 0) {
+            this.elements = Arrays.copyOf(array, n);
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: " + n);
+        }
+    }
 
     // + 2. Метод getSize() для получения размерности вектора
     public int getSize() {
@@ -42,18 +46,13 @@ public class Vector {
     @Override
     public String toString() {
 
-        if (this.elements == null)
-            return "null";
-        int iMax = this.elements.length - 1;
-        if (iMax == -1)
-            return "{}";
-
         StringBuilder b = new StringBuilder();
         b.append('{');
         for (int i = 0; ; i++) {
             b.append(this.elements[i]);
-            if (i == iMax)
+            if (i == this.elements.length - 1) {
                 return b.append('}').toString();
+            }
             b.append(", ");
         }
     }
@@ -65,17 +64,13 @@ public class Vector {
     private void setLength(Vector array) {
         if (array.getSize() > this.getSize()) {
             this.elements = (new Vector(array.getSize(), this.elements)).elements;
-        } else if (this.getSize() > array.getSize()) {
-            array.elements = (new Vector(this.getSize(), array.elements)).elements;
         }
-
-
     }
 
     public Vector addition(Vector array) {
 
         setLength(array);
-        for (int i = 0; i <= array.elements.length - 1; i++) {
+        for (int i = 0; i < array.elements.length; i++) {
             this.elements[i] = this.elements[i] + array.elements[i];
         }
 
@@ -85,7 +80,7 @@ public class Vector {
     // + b. Вычитание из вектора другого вектора
     public Vector difference(Vector array) {
         setLength(array);
-        for (int i = 0; i <= array.elements.length - 1; i++) {
+        for (int i = 0; i < array.elements.length; i++) {
             this.elements[i] = this.elements[i] - array.elements[i];
         }
         return this;
@@ -94,7 +89,7 @@ public class Vector {
     // + c. Умножение вектора на скаляр
     public Vector multiplicationByScalar(int m) {
 
-        for (int i = 0; i <= this.elements.length - 1; i++) {
+        for (int i = 0; i < this.elements.length; i++) {
             this.elements[i] = this.elements[i] * m;
         }
         return this;
@@ -145,30 +140,29 @@ public class Vector {
     // + a. Сложение двух векторов
     public static Vector addition(Vector one, Vector two) {
 
-        Vector result = new Vector(one.getSize());
-
-        for (int i = 0; i <= one.elements.length - 1; i++) {
-            result.elements[i] = one.elements[i] + two.elements[i];
-        }
+        Vector result = one.addition(two);
         return result;
     }
 
     // + b. Вычитание из вектора другого вектора
     public static Vector difference(Vector one, Vector two) {
 
-        Vector result = new Vector(one.getSize());
-        for (int i = 0; i <= one.elements.length - 1; i++) {
-            result.elements[i] = one.elements[i] - two.elements[i];
-        }
+        Vector result = one.difference(two);
         return result;
     }
 
     // c. Скалярное произведение векторов
     public static double multiplicationVectors(Vector one, Vector two) {
+
         double result = 0;
-        for (int i = 0; i <= one.elements.length - 1; ) {
-            result += one.elements[i] * two.elements[i];
-            i++;
+        if (one.getSize() < two.getSize()) {
+            for (int i = 0; i < one.getSize(); i++) {
+                result += one.elements[i] * two.elements[i];
+            }
+        } else {
+            for (int i = 0; i < two.getSize(); i++) {
+                result += one.elements[i] * two.elements[i];
+            }
         }
         return result;
     }
