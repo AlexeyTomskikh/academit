@@ -152,9 +152,9 @@ public class Vector {
     // c. Скалярное произведение векторов
     public static double multiplicationVectors(Vector one, Vector two) {
 
-        int a = one.getSize() < two.getSize() ? one.getSize() : two.getSize();
+        int size = Math.min(one.getSize(),two.getSize());
         double result = 0;
-        for (int i = 0; i < a; i++) {
+        for (int i = 0; i < size; i++) {
             result += one.elements[i] * two.elements[i];
         }
         return result;
