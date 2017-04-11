@@ -34,12 +34,19 @@ public class Main {
         System.out.println("У равных векторов хэши равны. Hash вектора3  = " + vector3.hashCode() + " . Хэш вектрора4 = " + vector3.hashCode());
         // 5. Реализовать статические методы – должны создаваться новые векторы:
         // a. Сложение двух векторов
-        System.out.println("Статичный метод: Сложение двух векторов " + Vector.addition(vector1, vector2));
+        Vector vector10 = new Vector(new double[]{2, 3, 3});
+        Vector vector11 = new Vector(new double[]{1, 2});
+        System.out.println("Статичный метод: Сложение двух векторов " + Vector.addition(vector10, vector11));
+        System.out.println("первый" + vector10);
+        System.out.println("второй" + vector11);
+
+
         // b. Вычитание векторов
+
         System.out.println("Статичный метод: Вычитание векторов " + Vector.difference(vector1, vector2));
         // c. Скалярное произведение векторов
-        Vector vector8 = new Vector(new double[]{2, 3, 3});
-        Vector vector9 = new Vector(new double[]{1, 2});
+        Vector vector8 = new Vector(new double[]{1, 2});
+        Vector vector9 = new Vector(new double[]{2, 3, 3});
         System.out.println("Статичные метод: Скалярное произведение векторов = " + Vector.multiplicationVectors(vector8, vector9));
     }
 }

@@ -57,16 +57,14 @@ public class Vector {
         }
     }
 
-    // 4. Реализовать нестатические методы:
-
-    // + a. Прибавление к вектору другого вектора
 
     private void setLength(Vector array) {
         if (array.getSize() > this.getSize()) {
-            this.elements = (new Vector(array.getSize(), this.elements)).elements;
+            this.elements = Arrays.copyOf(this.elements, array.getSize());
         }
     }
-
+    // 4. Реализовать нестатические методы:
+    // + a. Прибавление к вектору другого вектора
     public Vector addition(Vector array) {
 
         setLength(array);
@@ -140,29 +138,24 @@ public class Vector {
     // + a. Сложение двух векторов
     public static Vector addition(Vector one, Vector two) {
 
-        Vector result = one.addition(two);
-        return result;
+        Vector copyOne = new Vector(one);
+        return copyOne.addition(two);
     }
 
     // + b. Вычитание из вектора другого вектора
     public static Vector difference(Vector one, Vector two) {
 
-        Vector result = one.difference(two);
-        return result;
+        Vector copyOne = new Vector(one);
+        return copyOne.difference(two);
     }
 
     // c. Скалярное произведение векторов
     public static double multiplicationVectors(Vector one, Vector two) {
 
+        int a = one.getSize() < two.getSize() ? one.getSize() : two.getSize();
         double result = 0;
-        if (one.getSize() < two.getSize()) {
-            for (int i = 0; i < one.getSize(); i++) {
-                result += one.elements[i] * two.elements[i];
-            }
-        } else {
-            for (int i = 0; i < two.getSize(); i++) {
-                result += one.elements[i] * two.elements[i];
-            }
+        for (int i = 0; i < a; i++) {
+            result += one.elements[i] * two.elements[i];
         }
         return result;
     }
