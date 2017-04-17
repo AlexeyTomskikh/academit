@@ -1,12 +1,13 @@
+package matrix;
+
+import matrix.Matrix;
+import matrix.Vector;
+
 public class Main {
     public static void main(String[] args) {
 
-        // a. Matrix(n, m) – матрица нулей размера nxm
+        // a. matrix.Matrix(n, m) – матрица нулей размера nxm
         System.out.println("1. Заполняем матрицу n x m нулями. n = 2, m = 2. Результат: " + new Matrix(2, 2));
-
-        // c. Matrix(double[][]) – из двумерного массива
-        Matrix matrix = new Matrix(new double[][]{{2, 3}, {1, 2}});
-        System.out.println(matrix);
 
         // b. Получение и задание вектора-строки по индексу
 

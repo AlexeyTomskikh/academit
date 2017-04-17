@@ -1,3 +1,4 @@
+package matrix;
 
 public class Matrix {
 
@@ -6,19 +7,19 @@ public class Matrix {
     private int n;
 
     // 1. Конструкторы:
-    // a. Matrix(n, m) – матрица нулей размера nxm
+    // a. matrix.Matrix(n, m) – матрица нулей размера nxm
     public Matrix(int m, int n) {
         this.m = m;
         this.n = n;
         this.matrix = new double[m][n];
     }
 
-    // + b. Matrix(Matrix) – конструктор копирования
+    // + b. matrix.Matrix(matrix.Matrix) – конструктор копирования
     public Matrix(Matrix one) {
         this(one.matrix);
     }
 
-    // c. Matrix(double[][]) – из двумерного массива
+    // c. matrix.Matrix(double[][]) – из двумерного массива
     public Matrix(double[][] matrix) {
         m = matrix.length;
         n = matrix[0].length;
@@ -28,7 +29,7 @@ public class Matrix {
         }
     }
 
-    // d. Matrix(Vector[]) – из массива векторов-строк
+    // d. matrix.Matrix(matrix.Vector[]) – из массива векторов-строк
     Matrix(Vector[] pom) {
         m = pom.length;
         n = pom[0].getSize();
